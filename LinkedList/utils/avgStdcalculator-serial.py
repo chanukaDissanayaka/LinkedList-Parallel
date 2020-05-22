@@ -1,14 +1,25 @@
 import statistics
 
-f = open("results-case3.txt", "r")
+cases = [1,2,3]
 
-results = []
 
-for x in f:
-	s = x.rstrip()
-	results.append(float(s))
+for i  in cases:
+	fileName = "results-case"+str(i)+".txt"
 
-average = statistics.mean(results)
-std = statistics.stdev(results)
 
-print(average, std)
+	f = open(fileName, "r")
+
+	results = []
+
+	for x in f:
+		s = x.rstrip()
+		results.append(float(s))
+
+	average = statistics.mean(results)
+	std = statistics.stdev(results)
+
+	print(fileName, average, std)
+	print(" ")
+
+
+

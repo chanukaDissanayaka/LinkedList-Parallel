@@ -1,6 +1,6 @@
 import statistics
 
-cases = [1,2,3]
+cases = [3]
 threadCount = [1,2,4,8]
 
 

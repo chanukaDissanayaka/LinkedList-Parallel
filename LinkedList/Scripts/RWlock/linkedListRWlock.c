@@ -37,11 +37,9 @@ int Member(int value, struct list_node_s *head_p){
 	}
 
 	if(curr_p == NULL || (curr_p->data) > value){
-		printf("not a member\n");
 		return 0;
 	}
 	else {
-		printf("member\n");
 		return 1;
 	}
 }
@@ -70,12 +68,10 @@ int insert(int value, struct list_node_s **head_p){
 		else{
 			pred_p->next = temp_p;
 
-		printf("insert successful\n");
 		return 1;
 		}
 	}
 	else {
-		printf("insert not successful\n");
 		return 0;
 	}
 }
@@ -99,11 +95,9 @@ int delete(int value, struct list_node_s **head_pp){
 			pred_p->next = curr_p->next;
 			free(curr_p);
 		}
-		printf("delete successful\n");
 		return 1;
 	}
 	else {
-		printf("error deleting\n");
 		return 0;
 	}
 }
@@ -133,54 +127,23 @@ void generateList(int size){
 
 void writeResultstoFile(float result){
 	FILE *fp;
-	//fp = fopen ("results-case3.txt","a");
-	fp = fopen ("results-case3-thread_count_8.txt","a");
+	//fp = fopen ("test.txt","a");
+	fp = fopen ("results-case1-thread_count_8.txt","a");
 	fprintf(fp, "%.6f\n", result);
 }
 
 void *randomOperation(){
-
-	double thread_m_absolute;
-	double thread_m_member_absolute;
-	double thread_m_insert_absolute;
-	double thread_m_delete_absolute;
 
 	long thread_m;
 	long thread_m_member;
 	long thread_m_insert;
 	long thread_m_delete;
 
-	//divide the operation between threads
-	thread_m_absolute = m / thread_count;
-	thread_m_member_absolute = total_member / (float) thread_count;
-	thread_m_insert_absolute = total_insert / (float) thread_count;
-	thread_m_delete_absolute = total_delete / (float) thread_count;
-
-
-	//add one operation for each if not dividing
-	if(m % thread_count == 0 ){
-		thread_m = thread_m = (int) thread_m_absolute;
-	}else{
-		thread_m = (int) thread_m_absolute + 1 ;
-	}
-
-	if(total_member % thread_count == 0){
-		thread_m_member = (int) thread_m_member_absolute;
-	}else{
-		thread_m_member = (int) thread_m_member_absolute + 1;
-	}
-
-	if(total_insert % thread_count == 0){
-		thread_m_insert = (int) thread_m_insert_absolute;
-	}else{
-		thread_m_insert = (int) thread_m_insert_absolute + 1;
-	}
-
-	if(total_delete % thread_count == 0){
-		thread_m_delete = (int) thread_m_delete_absolute;
-	}else{
-		thread_m_delete = (int) thread_m_delete_absolute + 1;
-	}
+	//divide the operation between threads. add 1 to execute without loss
+	thread_m = (m / thread_count) + 1;
+	thread_m_member = (int)(total_member / (float) thread_count) + 1;
+	thread_m_insert = (int)(total_insert / (float) thread_count) + 1;
+	thread_m_delete = (int)(total_delete / (float) thread_count) + 1;
 
 
 	int thread_completed_operations = 0;
@@ -241,11 +204,6 @@ int main(int argc, char* argv[]){
 	clock_t start_time;
 	clock_t end_time;
 	double timeSpent ;
-
-
-	/*int v;
-	scanf("%d", &v);
-	printf(" input is : %d\n", v);*/
 
 	long ran = pow(2,16);
 

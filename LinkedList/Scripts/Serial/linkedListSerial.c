@@ -38,11 +38,9 @@ int Member(int value, struct list_node_s *head_p){
 	}
 
 	if(curr_p == NULL || (curr_p->data) > value){
-		printf("not a member\n");
 		return 0;
 	}
 	else {
-		printf("member\n");
 		return 1;
 	}
 }
@@ -71,12 +69,10 @@ int insert(int value, struct list_node_s **head_p){
 		else{
 			pred_p->next = temp_p;
 
-		printf("insert successful\n");
 		return 1;
 		}
 	}
 	else {
-		printf("insert not successful\n");
 		return 0;
 	}
 }
@@ -100,11 +96,9 @@ int delete(int value, struct list_node_s **head_pp){
 			pred_p->next = curr_p->next;
 			free(curr_p);
 		}
-		printf("delete successful\n");
 		return 1;
 	}
 	else {
-		printf("error deleting\n");
 		return 0;
 	}
 }
@@ -134,8 +128,8 @@ void generateList(int size){
 
 void writeResultstoFile(float result){
 	FILE *fp;
-	//fp = fopen ("results-case3.txt","a");
-	fp = fopen ("test.txt","a");
+	fp = fopen ("results-case3.txt","a");
+	//fp = fopen ("test.txt","a");
 	fprintf(fp, "%.6f\n", result);
 }
 
@@ -188,11 +182,6 @@ int main(int argc, char* argv[]){
 	clock_t end_time;
 	double timeSpent ;
 
-
-	/*int v;
-	scanf("%d", &v);
-	printf(" input is : %d\n", v);*/
-
 	long ran = pow(2,16);
 
 	n = (int) strtol(argv[1], NULL, 10);
@@ -205,9 +194,6 @@ int main(int argc, char* argv[]){
 	total_member = (int) m * m_member;
 	total_insert = (int) m * m_insert;
 	total_delete = (int) m * m_delete;
-
-	printf("%f , %li\n", m_member, total_member);
-
 
 	//generate list with given n
 	generateList(n);
@@ -227,5 +213,5 @@ int main(int argc, char* argv[]){
 	printf("m_delete : %.3f\n", m_delete);
 	printf("time spent : %.8f\n", timeSpent);
 	
-	writeResultstoFile(timeSpent);
+	//writeResultstoFile(timeSpent);
 }
